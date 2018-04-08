@@ -130,24 +130,15 @@ class Dashboard extends Component {
             align='center'>
           <Box pad='medium'>
             <Heading tag='h1' strong={true}>
-              Decide your future
+              Crowd deciding
             </Heading>
             <Paragraph size='large'>
               Blockchain is a way to store and share data that is transparent, secure, and public. As part of a blockchain hackathon, we have created this fully functional voting system on blockchain.
             </Paragraph>
           </Box>
         </Box>
-        <Box direction='row'>
-          <Box pad='medium' basis='1/2' align='end'>
-            <Button label='New Poll'
-              href='/polls'
-              primary={false}
-              secondary={false}
-              accent={true}
-              critical={false}
-              plain={false} />
-          </Box>
-          <Box pad='medium' basis='1/2' align='start'>
+        <Box direction='row'  align='center' justify='center'>
+          <Box pad='medium'>
             <Button label='Vote Polls'
               href='/polls'
               primary={false}
