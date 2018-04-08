@@ -1,8 +1,20 @@
 "use strict";
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+  };
+}();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
 var Poll = function () {
   function Poll(question, type) {
@@ -72,26 +84,22 @@ var travelOptions = {
 
 var coinOptions = {
   "Bitcoin": new Option("Bitcoin", "https://s2.coinmarketcap.com/static/img/coins/16x16/1.png"),
-"Ethereum": new Option("Ethereum", "https://s2.coinmarketcap.com/static/img/coins/16x16/1027.png"),
-"Ripple": new Option("Ripple", "https://s2.coinmarketcap.com/static/img/coins/16x16/52.png"),
-"Bitcoin Cash": new Option("Bitcoin Cash", "https://s2.coinmarketcap.com/static/img/coins/16x16/1831.png"),
-"Litecoin": new Option("Litecoin", "https://s2.coinmarketcap.com/static/img/coins/16x16/2.png"),
-"EOS": new Option("EOS", "https://s2.coinmarketcap.com/static/img/coins/16x16/1765.png"),
-"Cardano": new Option("Cardano", "https://s2.coinmarketcap.com/static/img/coins/16x16/2010.png"),
-"Stellar": new Option("Stellar", "https://s2.coinmarketcap.com/static/img/coins/16x16/512.png"),
-"NEO": new Option("NEO", "https://s2.coinmarketcap.com/static/img/coins/16x16/1376.png"),
-"IOTA": new Option("IOTA", "https://s2.coinmarketcap.com/static/img/coins/16x16/1720.png"),
-"Monero": new Option("Monero", "https://s2.coinmarketcap.com/static/img/coins/16x16/328.png"),
+  "Ethereum": new Option("Ethereum", "https://s2.coinmarketcap.com/static/img/coins/16x16/1027.png"),
+  "Ripple": new Option("Ripple", "https://s2.coinmarketcap.com/static/img/coins/16x16/52.png"),
+  "Bitcoin Cash": new Option("Bitcoin Cash", "https://s2.coinmarketcap.com/static/img/coins/16x16/1831.png"),
+  "Litecoin": new Option("Litecoin", "https://s2.coinmarketcap.com/static/img/coins/16x16/2.png"),
+  "EOS": new Option("EOS", "https://s2.coinmarketcap.com/static/img/coins/16x16/1765.png"),
+  "Cardano": new Option("Cardano", "https://s2.coinmarketcap.com/static/img/coins/16x16/2010.png"),
+  "Stellar": new Option("Stellar", "https://s2.coinmarketcap.com/static/img/coins/16x16/512.png"),
+  "NEO": new Option("NEO", "https://s2.coinmarketcap.com/static/img/coins/16x16/1376.png"),
+  "IOTA": new Option("IOTA", "https://s2.coinmarketcap.com/static/img/coins/16x16/1720.png"),
+  "Monero": new Option("Monero", "https://s2.coinmarketcap.com/static/img/coins/16x16/328.png")
 };
 
 var app = lotion({
   initialState: {
     count: 0,
-    polls: [new Poll('Who would you vote for today?', 'Election', electionOptions),
-    new Poll('Thanks for your donation to Puerto Rico. Where would you like your funds to go?', 'Funding', fundingOptions),
-    new Poll('What is your favorite city to visit? ', 'Travel', travelOptions),
-    new Poll('Which coin would you pick if won the hackathon? ', 'Prize', coinOptions),
-    ]
+    polls: [new Poll('Who would you vote for today?', 'Election', electionOptions), new Poll('Thanks for your donation to Puerto Rico. Where would you like your funds to go?', 'Funding', fundingOptions), new Poll('What is your favorite city to visit? ', 'Travel', travelOptions), new Poll('Which coin would you pick if won the hackathon? ', 'Prize', coinOptions)]
   },
   devMode: process.env.PRODUCTION !== 'true'
 });
@@ -130,4 +138,5 @@ var port = process.env.PORT || 3001;
 app.listen(port);
 
 module.exports = app;
+//# sourceMappingURL=chain.js.map
 //# sourceMappingURL=chain.js.map
