@@ -130,7 +130,7 @@ class Dashboard extends Component {
             align='center'>
           <Box pad='medium'>
             <Heading tag='h1' strong={true}>
-              Crowd deciding
+              Crowd Deciding
             </Heading>
             <Paragraph size='large'>
               Blockchain is a way to store and share data that is transparent, secure, and public. As part of a blockchain hackathon, we have created this fully functional voting system on blockchain.
