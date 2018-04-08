@@ -6,19 +6,22 @@ import Article from 'grommet/components/Article';
 import Box from 'grommet/components/Box';
 import Header from 'grommet/components/Header';
 import Heading from 'grommet/components/Heading';
+import Headline from 'grommet/components/Headline';
 import Label from 'grommet/components/Label';
 import Meter from 'grommet/components/Meter';
 import Notification from 'grommet/components/Notification';
 import Value from 'grommet/components/Value';
 import Spinning from 'grommet/components/icons/Spinning';
 import LinkPrevious from 'grommet/components/icons/base/LinkPrevious';
-
+import Paragraph from 'grommet/components/Paragraph';
 import List from 'grommet/components/List';
 import ListItem from 'grommet/components/ListItem';
 import Button from 'grommet/components/Button';
 import CheckBox from 'grommet/components/CheckBox';
 import Image from 'grommet/components/Image';
 
+import Table from 'grommet/components/Table';
+import TableRow from 'grommet/components/TableRow';
 
 
 import {
@@ -159,6 +162,33 @@ class Poll extends Component {
             </ListItem>)
     })
 
+
+    const bulletsNode =(poll && poll.options) && Object.keys(poll.options).map(opt => {
+      const option = poll.options[opt];
+      return (
+        <div>
+        <Table>
+          <thead>
+          <tr>
+              <th>
+                {opt}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {option.bullets && option.bullets.map((bullet,index) => {
+              return(<TableRow key={`${bullet}-${index}`}>
+                        <td>
+                          {bullet}
+                        </td>
+                      </TableRow>)
+                })
+              }
+          </tbody>
+        </Table>
+        </div>)
+    })
+
     return (
       <Article primary={true} full={true}>
         <Header
@@ -182,6 +212,11 @@ class Poll extends Component {
         <List>
           {optionsNode}
         </List>
+        {(poll && poll.options && poll.type === "Funding" ) &&
+          <Headline strong={true}>
+            &nbsp;
+        </Headline>}
+        {bulletsNode}
       </Article>
     );
   }
