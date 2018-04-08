@@ -2,7 +2,7 @@ import { DASHBOARD_LOAD, DASHBOARD_UNLOAD } from '../actions';
 import { createReducer } from './utils';
 
 const initialState = {
-  tasks: []
+  polls: []
 };
 
 const handlers = {
