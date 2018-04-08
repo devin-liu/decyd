@@ -10,28 +10,28 @@ const _notifiers = {
 
 export const polls = [
   {
-    id: 'poll-1',
+    id: '0',
     name: 'Poll 1',
     question: 'Who is the next president?',
     percentComplete: 0,
     status: 'Waiting'
   },
   {
-    id: 'poll-2',
+    id: '1',
     name: 'Poll 2',
     question: 'What is for dinner?',
     percentComplete: 0,
     status: 'Waiting'
   },
   {
-    id: 'poll-3',
+    id: '2',
     name: 'Poll 3',
     question: 'Which sponsor is your favorite?',
     percentComplete: 0,
     status: 'Waiting'
   },
   {
-    id: 'poll-4',
+    id: '3',
     name: 'Poll 4',
     question: 'Can you say hi to me?',
     percentComplete: 0,
@@ -90,14 +90,13 @@ export function addNotifier(type, cb) {
 }
 
 export function getPolls(filters) {
-  if (filters) {
-    return Promise.resolve({
-      polls: polls.filter(poll =>
-        Object.keys(filters).some(filter => poll[filter] === filters[filter])
-      )
-    });
-  }
-  return Promise.resolve({ polls });
+  return axios.get('http://localhost:3001/state')
+  .then(response => {
+    return Promise.resolve({polls: response.data.polls})
+  })
+  .catch(error => {
+    console.log(error);
+  });
 }
 
 export function getPoll(id) {
@@ -111,8 +110,10 @@ export function getPoll(id) {
   // return Promise.resolve({ poll });
   return axios.get('http://localhost:3001/state')
   .then(response => {
-    console.log(response.data.poll);
-    return Promise.resolve({poll: response.data.poll})
+  console.log(id)
+    console.log(response.data.polls[id]);
+    console.log(response.data.polls[parseInt(id)]);
+    return Promise.resolve({poll: response.data.polls[parseInt(id)]})
   })
   .catch(error => {
     console.log(error);

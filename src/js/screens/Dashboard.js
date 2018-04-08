@@ -138,9 +138,8 @@ class Dashboard extends Component {
           </Box>
         </Box>
         <Box direction='row'>
-          <Box pad='medium' basis='1/2' align='end' justify='right'>
+          <Box pad='medium' basis='1/2' align='end'>
             <Button label='New Poll'
-              onClick={false}
               href='/polls'
               primary={false}
               secondary={false}
@@ -148,10 +147,8 @@ class Dashboard extends Component {
               critical={false}
               plain={false} />
           </Box>
-          <Box pad='medium' basis='1/2' align='start' justify='left'>
+          <Box pad='medium' basis='1/2' align='start'>
             <Button label='Vote Polls'
-              colorIndex='accent-1'
-              onClick={false}
               href='/polls'
               primary={false}
               secondary={false}

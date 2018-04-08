@@ -66,12 +66,12 @@ class Polls extends Component {
         </Box>
       );
     } else {
-      const pollsNode = (polls || []).map(poll => (
+      const pollsNode = (polls || []).map((poll, index) => (
         <ListItem
-          key={`poll_${poll.id}`}
+          key={`poll_${index}`}
           justify='start'
         >
-          <Label><Anchor path={`/polls/${poll.id}`} label={poll.question} /></Label>
+          <Label><Anchor path={`/polls/${index}`} label={`${poll.type} | ${poll.question}`} /></Label>
           <Box
             direction='row'
             responsive={false}

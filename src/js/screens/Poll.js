@@ -71,14 +71,28 @@ class Poll extends Component {
         </Box>
       );
     }
-    console.log(poll.options)
-    const optionsNode = poll && Object.keys(poll.options).map(opt => {
-      const option = poll.options[opt]
-      const percent = option.votes;
+    let total = 0;
+    if(poll && poll.options){
+      Object.keys(poll.options).map(opt => {
+        total += parseInt(poll.options[opt].votes);
+      })
+    }
+    const optionsNode = (poll && poll.options) && Object.keys(poll.options).map(opt => {
+      const option = poll.options[opt];
+      const percent = total ? (option.votes / total)*100 : 0;
       return (<ListItem>
               <Label>
                 {opt}
               </Label>
+              <Box
+                  direction='row'
+                  responsive={false}
+                  pad={{ between: 'small' }}
+                >
+                <Label>
+                  &nbsp;{` | ${option.votes} | `}&nbsp;
+                </Label>
+              </Box>
               <Box
                   direction='row'
                   responsive={false}
