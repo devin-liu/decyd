@@ -48,11 +48,13 @@ class Poll extends Component {
 
   vote(event) {
     event.preventDefault();
+
     const option = event.target.value;
     this.setState({option});
     this.postData('http://localhost:3001/txs', {
       action: 'vote',
-      option
+      option,
+      id: this.props.match.params.id
     })
       .then(data => console.log(data)) // JSON from `response.json()` call
       .catch(error => console.error(error))
