@@ -15,6 +15,10 @@ import LinkPrevious from 'grommet/components/icons/base/LinkPrevious';
 
 import List from 'grommet/components/List';
 import ListItem from 'grommet/components/ListItem';
+import Button from 'grommet/components/Button';
+import CheckBox from 'grommet/components/CheckBox';
+
+
 
 import {
   loadPoll, unloadPoll
@@ -23,6 +27,13 @@ import {
 import { pageLoaded } from './utils';
 
 class Poll extends Component {
+  constructor() {
+    super();
+    this.state = {
+      option: null
+    }
+    this.vote = this.vote.bind(this);
+  }
   componentDidMount() {
     const { match: { params }, dispatch } = this.props;
     pageLoaded('Poll');
@@ -33,6 +44,36 @@ class Poll extends Component {
     const { match: { params }, dispatch } = this.props;
     dispatch(unloadPoll(params.id));
   }
+
+  vote(event) {
+    event.preventDefault();
+    const option = event.target.value;
+    this.setState({option});
+    this.postData('http://localhost:3001/txs', {
+      action: 'vote',
+      option
+    })
+      .then(data => console.log(data)) // JSON from `response.json()` call
+      .catch(error => console.error(error))
+  }
+
+  postData(url, data) {
+  // Default options are marked with *
+  return fetch(url, {
+    body: JSON.stringify(data), // must match 'Content-Type' header
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, same-origin, *omit
+    headers: {
+      'user-agent': 'Mozilla/4.0 MDN Example',
+      'content-type': 'application/json'
+    },
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, cors, *same-origin
+    redirect: 'follow', // *manual, follow, error
+    referrer: 'no-referrer', // *client, no-referrer
+  })
+  .then(response => response.json()) // parses response to JSON
+}
 
   render() {
     const { error, poll } = this.props;
@@ -79,8 +120,13 @@ class Poll extends Component {
     }
     const optionsNode = (poll && poll.options) && Object.keys(poll.options).map(opt => {
       const option = poll.options[opt];
-      const percent = total ? (option.votes / total)*100 : 0;
-      return (<ListItem>
+      const percent = total ? parseInt((option.votes / total)*100) : 0;
+      return (<ListItem key={`${opt}`}>
+              <CheckBox
+                value={opt}
+                checked={this.state.option === opt}
+                onClick={this.vote}
+                toggle={false} />
               <Label>
                 {opt}
               </Label>

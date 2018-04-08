@@ -27,13 +27,18 @@ class Option {
 
 let lotion = require('lotion')
 
+const electionOptions = {
+  Trump: new Option('Trump'),
+  Hillary: new Option('Hillary'),
+  Bernie: new Option('Bernie'),
+}
 
 
 let app = lotion({
   initialState: {
     count: 0,
     polls: [
-      new Poll('Who would you vote for today?', 'Election'),
+      new Poll('Who would you vote for today?', 'Election', electionOptions),
       new Poll('Thanks for your donation to Puerto Rico. Where would you like your funds to go?', 'Funding'),
       new Poll('What is your favorite city to visit? ', 'Travel'),
     ],
