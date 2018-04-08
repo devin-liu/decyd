@@ -11,6 +11,7 @@ import { navResponsive } from '../actions/nav';
 import Login from '../screens/Login';
 import Dashboard from '../screens/Dashboard';
 import Tasks from '../screens/Tasks';
+import Polls from '../screens/Polls';
 import Task from '../screens/Task';
 import NotFound from '../screens/NotFound';
 
@@ -25,34 +26,18 @@ class Main extends Component {
   }
 
   render() {
-    const {
-      nav: { active: navActive, enabled: navEnabled, responsive }
-    } = this.props;
-    const includeNav = (navActive && navEnabled);
-    let nav;
-    if (includeNav) {
-      nav = <NavSidebar />;
-    }
-    const priority = (includeNav && responsive === 'single' ? 'left' : 'right');
-
     return (
       <App centered={false}>
         <Router>
-          <Split
-            priority={priority}
-            flex='right'
-            onResponsive={this._onResponsive}
-          >
-            {nav}
             <Switch>
               <Route exact={true} path='/' component={Dashboard} />
               <Route path='/dashboard' component={Dashboard} />
               <Route path='/login' component={Login} />
+              <Route path='/polls' component={Polls} />
               <Route path='/tasks/:id' component={Task} />
               <Route path='/tasks' component={Tasks} />
               <Route path='/*' component={NotFound} />
             </Switch>
-          </Split>
         </Router>
       </App>
     );

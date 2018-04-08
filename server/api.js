@@ -1,5 +1,5 @@
 import express from 'express';
-import { addSession, getTasks, getTask } from './data';
+import { addSession, getPolls, getPoll } from './data';
 
 const router = express.Router();
 
@@ -18,13 +18,13 @@ router.post('/sessions', (req, res) => {
   }
 });
 
-router.get('/task', (req, res) => {
-  getTasks(req.query).then(tasks => res.json(tasks));
+router.get('/poll', (req, res) => {
+  getPolls(req.query).then(polls => res.json(polls));
 });
 
-router.get('/task/:id', (req, res) => {
-  getTask(req.params.id).then((result) => {
-    if (!result.task) {
+router.get('/poll/:id', (req, res) => {
+  getPoll(req.params.id).then((result) => {
+    if (!result.poll) {
       res.status(404).end();
     } else {
       res.json(result);

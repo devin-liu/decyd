@@ -1,29 +1,29 @@
 const _sessions = {};
 const _notifiers = {
-  task: []
+  poll: []
 };
 
-export const tasks = [
+export const polls = [
   {
-    id: 'task-1',
+    id: 'poll-1',
     name: 'Initializing instance',
     percentComplete: 0,
     status: 'Waiting'
   },
   {
-    id: 'task-2',
+    id: 'poll-2',
     name: 'Adding components',
     percentComplete: 0,
     status: 'Waiting'
   },
   {
-    id: 'task-3',
+    id: 'poll-3',
     name: 'Testing infrastructure',
     percentComplete: 0,
     status: 'Waiting'
   },
   {
-    id: 'task-4',
+    id: 'poll-4',
     name: 'Removing instance',
     percentComplete: 0,
     status: 'Waiting'
@@ -34,34 +34,34 @@ const increments = [5, 10, 20, 25];
 
 setInterval(
   () => {
-    const task = tasks[
-      Math.floor(Math.random() * tasks.length)
+    const poll = polls[
+      Math.floor(Math.random() * polls.length)
     ];
 
-    if (!task.percentComplete) {
-      task.status = 'Running';
+    if (!poll.percentComplete) {
+      poll.status = 'Running';
     }
 
-    _notifiers.task.forEach(notifier => notifier(task));
+    _notifiers.poll.forEach(notifier => notifier(poll));
   },
   2000
 );
 
 setInterval(
   () => {
-    tasks.forEach((task) => {
-      if (task.status === 'Running') {
-        if (task.percentComplete < 100) {
-          task.percentComplete = Math.min(100, task.percentComplete +
+    polls.forEach((poll) => {
+      if (poll.status === 'Running') {
+        if (poll.percentComplete < 100) {
+          poll.percentComplete = Math.min(100, poll.percentComplete +
             increments[
               Math.floor(Math.random() * increments.length)
             ]
           );
         } else {
-          task.percentComplete = 0;
-          task.status = 'Waiting';
+          poll.percentComplete = 0;
+          poll.status = 'Waiting';
         }
-        _notifiers.task.forEach(notifier => notifier(task));
+        _notifiers.poll.forEach(notifier => notifier(poll));
       }
     });
   },
@@ -80,27 +80,27 @@ export function addNotifier(type, cb) {
   _notifiers[type].push(cb);
 }
 
-export function getTasks(filters) {
+export function getPolls(filters) {
   if (filters) {
     return Promise.resolve({
-      tasks: tasks.filter(task =>
-        Object.keys(filters).some(filter => task[filter] === filters[filter])
+      polls: polls.filter(poll =>
+        Object.keys(filters).some(filter => poll[filter] === filters[filter])
       )
     });
   }
-  return Promise.resolve({ tasks });
+  return Promise.resolve({ polls });
 }
 
-export function getTask(id) {
-  let task;
-  tasks.some((t) => {
+export function getPoll(id) {
+  let poll;
+  polls.some((t) => {
     if (t.id === id) {
-      task = t;
+      poll = t;
       return true;
     }
     return false;
   });
-  return Promise.resolve({ task });
+  return Promise.resolve({ poll });
 }
 
-export default { addNotifier, addSession, getSession, getTask, getTasks };
+export default { addNotifier, addSession, getSession, getPoll, getPolls };

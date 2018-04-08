@@ -6,7 +6,7 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import path from 'path';
 import api from './api';
-import { addNotifier, getTasks, getTask } from './data';
+import { addNotifier, getPolls, getPoll } from './data';
 import Notifier from './notifier';
 
 const PORT = process.env.PORT || 8102;
@@ -14,12 +14,12 @@ const PORT = process.env.PORT || 8102;
 const notifier = new Notifier();
 
 addNotifier(
-  'task',
-  (task) => {
+  'poll',
+  (poll) => {
     // this can be invoked multiple times as new requests happen
     notifier.test((request) => {
-      // we should skip notify if the id of the task does not match the payload
-      if (request.path === '/api/task/:id' && request.params.id !== task.id) {
+      // we should skip notify if the id of the poll does not match the payload
+      if (request.path === '/api/poll/:id' && request.params.id !== poll.id) {
         return false;
       }
       return true;
@@ -27,10 +27,10 @@ addNotifier(
   }
 );
 
-notifier.use('/api/task', () => getTasks());
-notifier.use('/api/task/:id', param => (
-  getTask(param.id).then((result) => {
-    if (!result.task) {
+notifier.use('/api/poll', () => getPolls());
+notifier.use('/api/poll/:id', param => (
+  getPoll(param.id).then((result) => {
+    if (!result.poll) {
       return Promise.reject({ statusCode: 404, message: 'Not Found' });
     }
     return Promise.resolve(result);

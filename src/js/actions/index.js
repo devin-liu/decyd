@@ -15,6 +15,12 @@ export const TASKS_UNLOAD = 'TASKS_UNLOAD';
 export const TASK_LOAD = 'TASK_LOAD';
 export const TASK_UNLOAD = 'TASK_UNLOAD';
 
+// Polls
+export const POLLS_LOAD = 'POLLS_LOAD';
+export const POLLS_UNLOAD = 'POLLS_UNLOAD';
+export const POLL_LOAD = 'POLL_LOAD';
+export const POLL_UNLOAD = 'POLL_UNLOAD';
+
 // Nav
 export const NAV_ACTIVATE = 'NAV_ACTIVATE';
 export const NAV_ENABLE = 'NAV_ENABLE';

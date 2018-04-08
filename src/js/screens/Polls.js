@@ -4,19 +4,19 @@ import { connect } from 'react-redux';
 import Anchor from 'grommet/components/Anchor';
 import Article from 'grommet/components/Article';
 import Box from 'grommet/components/Box';
-
+import Header from 'grommet/components/Header';
 import Label from 'grommet/components/Label';
 import List from 'grommet/components/List';
 import ListItem from 'grommet/components/ListItem';
 import Notification from 'grommet/components/Notification';
+import Meter from 'grommet/components/Meter';
 import Paragraph from 'grommet/components/Paragraph';
 import Value from 'grommet/components/Value';
-import Meter from 'grommet/components/Meter';
 import Spinning from 'grommet/components/icons/Spinning';
 import { getMessage } from 'grommet/utils/Intl';
 
-
-import Header from 'grommet/components/Header';
+import NavControl from '../components/NavControl';
+import LinkPrevious from 'grommet/components/icons/base/LinkPrevious';
 
 import Heading from 'grommet/components/Heading';
 import Headline from 'grommet/components/Headline';
@@ -24,27 +24,24 @@ import Hero from 'grommet/components/Hero';
 import Image from 'grommet/components/Image';
 import Button from 'grommet/components/Button';
 
-
-
-import NavControl from '../components/NavControl';
 import {
-  loadDashboard, unloadDashboard
-} from '../actions/dashboard';
+  loadPolls, unloadPolls
+} from '../actions/polls';
 
 import { pageLoaded } from './utils';
 
-class Dashboard extends Component {
+class Polls extends Component {
   componentDidMount() {
-    pageLoaded('Dashboard');
-    this.props.dispatch(loadDashboard());
+    pageLoaded('Polls');
+    this.props.dispatch(loadPolls());
   }
 
   componentWillUnmount() {
-    this.props.dispatch(unloadDashboard());
+    this.props.dispatch(unloadPolls());
   }
 
   render() {
-    const { error, tasks } = this.props;
+    const { error, polls } = this.props;
     const { intl } = this.context;
 
     let errorNode;
@@ -58,7 +55,7 @@ class Dashboard extends Component {
           message='An unexpected error happened, please try again later'
         />
       );
-    } else if (tasks.length === 0) {
+    } else if (polls.length === 0) {
       listNode = (
         <Box
           direction='row'
@@ -69,117 +66,77 @@ class Dashboard extends Component {
         </Box>
       );
     } else {
-      const tasksNode = (tasks || []).map(task => (
+      const pollsNode = (polls || []).map(poll => (
         <ListItem
-          key={`task_${task.id}`}
+          key={`poll_${poll.id}`}
           justify='between'
         >
-          <Label><Anchor path={`/tasks/${task.id}`} label={task.name} /></Label>
+          <Label><Anchor path={`/polls/${poll.id}`} label={poll.name} /></Label>
           <Box
             direction='row'
             responsive={false}
             pad={{ between: 'small' }}
           >
             <Value
-              value={task.percentComplete}
+              value={poll.percentComplete}
               units='%'
               align='start'
               size='small'
             />
-            <Meter value={task.percentComplete} />
+            <Meter value={poll.percentComplete} />
           </Box>
         </ListItem>
       ));
 
       listNode = (
         <List>
-          {tasksNode}
+          {pollsNode}
         </List>
       );
     }
-    // star backgroudn https://imgur.com/a/hfb5w
+
     return (
       <Article primary={true}>
-        <Hero background={<Image src='/img/star-bg.jpg'
-          fit='cover'
-          full={true} />}
-          backgroundColorIndex='dark'>
-          <Box direction='row'
-            justify='center'
-            align='center'>
-            <Box basis='1/2'
-              align='end'
-              pad='medium'>
-              <Image src='/img/logo.svg' />
-            </Box>
-            <Box basis='1/2'
-              align='start'
-              pad='medium'>
-              <Headline margin='none' size='large' strong={true}>
-                decyd.io
-              </Headline>
-              <br/>
-              <Headline margin='none' size='small'>
-                THE BLOCKCHAIN VOTING SYSTEM
-              </Headline>
-            </Box>
-          </Box>
-        </Hero>
+      <Anchor path='/dashboard'>
+          <LinkPrevious a11yTitle='Back to Home' />
+        </Anchor>
         <Box direction='row'
             justify='center'
             align='center'>
           <Box pad='medium'>
             <Heading tag='h1' strong={true}>
-              Enter in the future
+              Vote Polls
             </Heading>
             <Paragraph size='large'>
               Blockchain is a way to store and share data that is transparent, secure, and public. As part of a blockchain hackathon, we have created this fully functional voting system on blockchain.
             </Paragraph>
           </Box>
         </Box>
-        <Box direction='row'>
-          <Box pad='medium' basis='1/2' align='end' justify='right'>
-            <Button label='New Poll'
-              onClick={false}
-              href='/polls'
-              primary={false}
-              secondary={false}
-              accent={true}
-              critical={false}
-              plain={false} />
-          </Box>
-          <Box pad='medium' basis='1/2' align='start' justify='left'>
-            <Button label='Vote Polls'
-              colorIndex='accent-1'
-              onClick={false}
-              href='/polls'
-              primary={false}
-              secondary={false}
-              accent={true}
-              critical={false}
-              plain={false} />
-          </Box>
+        <Box direction='row'
+            justify='center'
+            >
+          {listNode}
         </Box>
       </Article>
     );
   }
 }
 
-Dashboard.defaultProps = {
+Polls.defaultProps = {
   error: undefined,
-  tasks: []
+  polls: []
 };
 
-Dashboard.propTypes = {
+Polls.propTypes = {
   dispatch: PropTypes.func.isRequired,
   error: PropTypes.object,
-  tasks: PropTypes.arrayOf(PropTypes.object)
+  polls: PropTypes.arrayOf(PropTypes.object)
 };
 
-Dashboard.contextTypes = {
+Polls.contextTypes = {
   intl: PropTypes.object
 };
 
-const select = state => ({ ...state.dashboard });
+const select = state => ({ ...state.polls });
 
-export default connect(select)(Dashboard);
+export default connect(select)(Polls);
