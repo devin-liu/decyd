@@ -216,7 +216,7 @@ class Poll extends Component {
           <Headline strong={true}>
             &nbsp;
         </Headline>}
-        {bulletsNode}
+        {(poll && poll.options && poll.type === "Funding" ) && bulletsNode}
       </Article>
     );
   }
