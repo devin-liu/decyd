@@ -30,6 +30,7 @@ addNotifier(
 notifier.use('/api/poll', () => getPolls());
 notifier.use('/api/poll/:id', param => (
   getPoll(param.id).then((result) => {
+    console.log('polled poll')
     if (!result.poll) {
       return Promise.reject({ statusCode: 404, message: 'Not Found' });
     }

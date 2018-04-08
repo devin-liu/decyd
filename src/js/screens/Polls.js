@@ -69,21 +69,16 @@ class Polls extends Component {
       const pollsNode = (polls || []).map(poll => (
         <ListItem
           key={`poll_${poll.id}`}
-          justify='between'
+          justify='start'
         >
-          <Label><Anchor path={`/polls/${poll.id}`} label={poll.name} /></Label>
+          <Label><Anchor path={`/polls/${poll.id}`} label={poll.question} /></Label>
           <Box
             direction='row'
             responsive={false}
             pad={{ between: 'small' }}
           >
-            <Value
-              value={poll.percentComplete}
-              units='%'
-              align='start'
-              size='small'
-            />
-            <Meter value={poll.percentComplete} />
+
+
           </Box>
         </ListItem>
       ));
@@ -107,9 +102,6 @@ class Polls extends Component {
             <Heading tag='h1' strong={true}>
               Vote Polls
             </Heading>
-            <Paragraph size='large'>
-              Blockchain is a way to store and share data that is transparent, secure, and public. As part of a blockchain hackathon, we have created this fully functional voting system on blockchain.
-            </Paragraph>
           </Box>
         </Box>
         <Box direction='row'

@@ -1,30 +1,39 @@
+const axios = require('axios');
+
+
 const _sessions = {};
 const _notifiers = {
   poll: []
 };
 
+
+
 export const polls = [
   {
     id: 'poll-1',
-    name: 'Initializing instance',
+    name: 'Poll 1',
+    question: 'Who is the next president?',
     percentComplete: 0,
     status: 'Waiting'
   },
   {
     id: 'poll-2',
-    name: 'Adding components',
+    name: 'Poll 2',
+    question: 'What is for dinner?',
     percentComplete: 0,
     status: 'Waiting'
   },
   {
     id: 'poll-3',
-    name: 'Testing infrastructure',
+    name: 'Poll 3',
+    question: 'Which sponsor is your favorite?',
     percentComplete: 0,
     status: 'Waiting'
   },
   {
     id: 'poll-4',
-    name: 'Removing instance',
+    name: 'Poll 4',
+    question: 'Can you say hi to me?',
     percentComplete: 0,
     status: 'Waiting'
   }
@@ -92,15 +101,22 @@ export function getPolls(filters) {
 }
 
 export function getPoll(id) {
-  let poll;
-  polls.some((t) => {
-    if (t.id === id) {
-      poll = t;
-      return true;
-    }
-    return false;
-  });
-  return Promise.resolve({ poll });
+  // polls.some((t) => {
+  //   if (t.id === id) {
+  //     poll = t;
+  //     return true;
+  //   }
+  //   return false;
+  // });
+  // return Promise.resolve({ poll });
+  return axios.get('http://localhost:3001/state')
+  .then(response => {
+    console.log(response.data.poll);
+    return Promise.resolve({poll: response.data.poll})
+  })
+  .catch(error => {
+    console.log(error);
+  });
 }
 
 export default { addNotifier, addSession, getSession, getPoll, getPolls };
