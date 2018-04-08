@@ -28,9 +28,15 @@ class Option {
 let lotion = require('lotion')
 
 const electionOptions = {
-  Trump: new Option('Trump'),
-  Hillary: new Option('Hillary'),
-  Bernie: new Option('Bernie'),
+  Trump: new Option('Trump', '/img/trump.jpg'),
+  Hillary: new Option('Hillary', '/img/hillary.jpg'),
+  Bernie: new Option('Bernie', '/img/bernie.jpg' ),
+}
+
+const travelOptions = {
+  'Paris, France': new Option('Paris, France', '/img/paris.jpg'),
+  'Tibud, Bali': new Option('Tibud, Bali', '/img/bali.jpg'),
+  'New York City, USA ': new Option('New York City, USA ', '/img/newyork.jpg'),
 }
 
 
@@ -40,7 +46,7 @@ let app = lotion({
     polls: [
       new Poll('Who would you vote for today?', 'Election', electionOptions),
       new Poll('Thanks for your donation to Puerto Rico. Where would you like your funds to go?', 'Funding'),
-      new Poll('What is your favorite city to visit? ', 'Travel'),
+      new Poll('What is your favorite city to visit? ', 'Travel', travelOptions),
     ],
   },
   devMode: process.env.PRODUCTION !== 'true'

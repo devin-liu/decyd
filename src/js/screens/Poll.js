@@ -17,6 +17,7 @@ import List from 'grommet/components/List';
 import ListItem from 'grommet/components/ListItem';
 import Button from 'grommet/components/Button';
 import CheckBox from 'grommet/components/CheckBox';
+import Image from 'grommet/components/Image';
 
 
 
@@ -127,8 +128,9 @@ class Poll extends Component {
                 checked={this.state.option === opt}
                 onClick={this.vote}
                 toggle={false} />
+              {option.img && <Image src={option.img} size='thumb' />}
               <Label>
-                {opt}
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{opt}
               </Label>
               <Box
                   direction='row'

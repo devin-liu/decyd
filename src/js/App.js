@@ -17,9 +17,6 @@ try {
 }
 const localeData = getLocaleData(messages, locale);
 
-if (window.location.pathname !== '/login') {
-  store.dispatch(initialize(window.location.pathname));
-}
 
 export default () => (
   <Provider store={store}>
